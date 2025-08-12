@@ -1,308 +1,62 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+    <!-- 基础元信息 -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>方块世界 | Minecraft服务器</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+    <title>绿洲 Minecraft 服务器</title>
+    <!-- 外部CSS文件链接 -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- 主容器 -->
+    <div class="container">
+        <!-- 页头：服务器名称与标语 -->
+        <header class="rounded-box">
+            <h1>绿洲 Minecraft 服务器</h1>
+            <p>探索 • 建造 • 生存</p>
+        </header>
         
-        body {
-            background: linear-gradient(135deg, #1a1f25, #0d1117);
-            color: #e0e0e0;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            position: relative;
-            overflow-x: hidden;
-        }
+        <main>
+            <!-- IP地址信息区块 -->
+            <section class="info-box rounded-box">
+                <h2>服务器地址</h2>
+                <div class="ip-address">
+                    <span id="server-ip">mc.oasis-server.com</span>
+                    <!-- IP复制交互按钮 -->
+                    <button onclick="copyIP()">复制IP</button>
+                </div>
+                <p>版本: Java 1.20.1</p>
+            </section>
+            
+            <!-- QQ群信息区块 -->
+            <section class="info-box rounded-box">
+                <h2>加入QQ交流群</h2>
+                <div class="qq-group">
+                    <span>群号: 123456789</span>
+                </div>
+                <p>获取最新资讯和玩家帮助</p>
+            </section>
+        </main>
         
-        /* 背景装饰元素 */
-        .cube {
-            position: absolute;
-            width: 50px;
-            height: 50px;
-            background-size: contain;
-            background-repeat: no-repeat;
-            opacity: 0.1;
-            z-index: -1;
+        <!-- 页脚：版权信息 -->
+        <footer class="rounded-box">
+            <p>© 2025 绿洲服务器 | 简约创造无限可能</p>
+        </footer>
+    </div>
+
+    <!-- IP复制功能脚本 -->
+    <script>
+        /**
+         * 复制服务器IP到剪贴板
+         * 成功时提示用户，失败时控制台报错
+         */
+        function copyIP() {
+            const ip = document.getElementById('server-ip');
+            navigator.clipboard.writeText(ip.textContent)
+                .then(() => alert('IP地址已复制!'))
+                .catch(err => console.error('复制失败:', err));
         }
-        
-        .cube:nth-child(1) {
-            top: 10%;
-            left: 5%;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23a5d6a7"/></svg>');
-            animation: float 8s infinite ease-in-out;
-        }
-        
-        .cube:nth-child(2) {
-            top: 30%;
-            right: 8%;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23f48fb1"/></svg>');
-            animation: float 10s infinite ease-in-out;
-        }
-        
-        .cube:nth-child(3) {
-            bottom: 20%;
-            left: 15%;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="%2390caf9"/></svg>');
-            animation: float 12s infinite ease-in-out;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(5deg); }
-        }
-        
-        .container {
-            background: rgba(30, 35, 40, 0.85);
-            backdrop-filter: blur(10px);
-            border-radius: 24px;
-            width: 100%;
-            max-width: 900px;
-            padding: 40px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #43a047, #1e88e5, #e53935);
-            border-radius: 24px 24px 0 0;
-        }
-        
-        header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        
-        .logo {
-            width: 120px;
-            height: 120px;
-            background: linear-gradient(135deg, #43a047, #1e88e5);
-            border-radius: 24px;
-            margin: 0 auto 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-        }
-        
-        .logo i {
-            font-size: 60px;
-            color: white;
-        }
-        
-        h1 {
-            font-size: 2.8rem;
-            margin-bottom: 10px;
-            background: linear-gradient(to right, #a5d6a7, #90caf9);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
-        
-        .subtitle {
-            font-size: 1.2rem;
-            color: #90a4ae;
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.6;
-        }
-        
-        .info-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-bottom: 40px;
-        }
-        
-        .card {
-            background: rgba(40, 45, 50, 0.7);
-            border-radius: 18px;
-            padding: 25px;
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-        }
-        
-        .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
-            background: rgba(45, 50, 55, 0.8);
-        }
-        
-        .card-icon {
-            width: 70px;
-            height: 70px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 30px;
-            color: #64b5f6;
-        }
-        
-        .card h2 {
-            font-size: 1.4rem;
-            margin-bottom: 15px;
-            color: #bb86fc;
-        }
-        
-        .card p {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #fff;
-            background: rgba(0, 0, 0, 0.2);
-            padding: 10px 15px;
-            border-radius: 12px;
-            display: inline-block;
-            margin: 5px 0;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .card p:hover {
-            background: rgba(0, 0, 0, 0.3);
-            transform: scale(1.05);
-        }
-        
-        .card p i {
-            margin-right: 8px;
-            font-size: 1.2rem;
-        }
-        
-        .btn {
-            display: inline-block;
-            background: linear-gradient(135deg, #43a047, #2e7d32);
-            color: white;
-            padding: 14px 35px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            text-decoration: none;
-            border-radius: 50px;
-            margin: 10px 5px;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-            background: linear-gradient(135deg, #4caf50, #388e3c);
-        }
-        
-        .btn.qq {
-            background: linear-gradient(135deg, #1e88e5, #0d47a1);
-        }
-        
-        .btn.qq:hover {
-            background: linear-gradient(135deg, #2196f3, #1565c0);
-        }
-        
-        .btn.copy {
-            background: linear-gradient(135deg, #f57c00, #e65100);
-        }
-        
-        .btn.copy:hover {
-            background: linear-gradient(135deg, #fb8c00, #ef6c00);
-        }
-        
-        .features {
-            margin: 40px 0;
-        }
-        
-        .features h2 {
-            text-align: center;
-            margin-bottom: 30px;
-            font-size: 2rem;
-            color: #bb86fc;
-        }
-        
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-        
-        .feature {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 18px;
-            padding: 25px;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-        
-        .feature:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateY(-5px);
-        }
-        
-        .feature i {
-            font-size: 40px;
-            color: #64b5f6;
-            margin-bottom: 20px;
-        }
-        
-        .feature h3 {
-            font-size: 1.3rem;
-            margin-bottom: 15px;
-            color: #a5d6a7;
-        }
-        
-        .feature p {
-            font-size: 0.95rem;
-            color: #b0bec5;
-            line-height: 1.6;
-        }
-        
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            padding-top: 25px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: #90a4ae;
-            font-size: 0.9rem;
-        }
-        
-        .notification {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%) translateY(-100px);
-            background: rgba(40, 45, 50, 0.95);
-            color: white;
-            padding: 15px 30px;
-            border-radius: 50px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-            transition: transform 0.4s ease;
-            z-index: 1000;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .notification.show {
-            transform: translateX(-50%) translateY(0);
-        }
-        
-        @media (max-width: 768px) {
-            .container {
-                padding: 30px 20px
+    </script>
+</body>
+</html>
