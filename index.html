@@ -1,56 +1,43 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <!-- 基础元信息 -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>绿洲 Minecraft 服务器</title>
-    <!-- 外部CSS文件链接 -->
-    <link rel="stylesheet" href="/new/styles.css">
+    <title>蓝海 Minecraft 服务器</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- 主容器 -->
     <div class="container">
-        <!-- 页头：服务器名称与标语 -->
         <header class="rounded-box">
-            <h1>绿洲 Minecraft 服务器</h1>
+            <h1>蓝海 Minecraft 服务器</h1>
             <p>探索 • 建造 • 生存</p>
         </header>
         
         <main>
-            <!-- IP地址信息区块 -->
             <section class="info-box rounded-box">
                 <h2>服务器地址</h2>
                 <div class="ip-address">
-                    <span id="server-ip">XXX.9666.fun:33443</span>
-                    <!-- IP复制交互按钮 -->
+                    <span id="server-ip">mc.blue-ocean-server.com</span>
                     <button onclick="copyIP()">复制IP</button>
                 </div>
-                <p>版本: Java 1.21</p>
+                <p>版本: Java 1.20.1</p>
             </section>
             
-            <!-- QQ群信息区块 -->
             <section class="info-box rounded-box">
                 <h2>加入QQ交流群</h2>
                 <div class="qq-group">
-                    <span>群号: 123456789</span>
+                    <span>群号: 987654321</span>
                 </div>
                 <p>获取最新资讯和玩家帮助</p>
             </section>
         </main>
         
-        <!-- 页脚：版权信息 -->
         <footer class="rounded-box">
-            <p>© 2025 绿洲服务器 | 简约创造无限可能</p>
+            <p>© 2025 蓝海服务器 | 简约创造无限可能</p>
         </footer>
     </div>
 
-    <!-- IP复制功能脚本 -->
     <script>
-        /**
-         * 复制服务器IP到剪贴板
-         * 成功时提示用户，失败时控制台报错
-         */
         function copyIP() {
             const ip = document.getElementById('server-ip');
             navigator.clipboard.writeText(ip.textContent)
